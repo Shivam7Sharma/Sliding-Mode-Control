@@ -2,7 +2,7 @@
 
 ## Sliding Mode Control for Drone Trajectory Following
 
-![Project Banner](./videos/ezgif.com-video-to-gif.gif)
+![Project Banner](./videos/ezgif.com-video-to-gif2.gif)
 
 ### Objective
 
@@ -32,7 +32,7 @@ Differentiating \( q<sub>d</sub>(t) \) with respect to time, we get:
 
 #### Desired Trajectory Plot
 
-![Desired Trajectory](./videos/ezgif.com-video-to-gif2.gif)
+![Desired Trajectory](./videos/demo_trajectory_plot.png)
 
 ---
 
