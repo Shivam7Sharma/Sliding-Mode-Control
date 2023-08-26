@@ -1,85 +1,92 @@
 # RBE502_Final_Project
-This project uses sliding mode control for controlling a drone to follow a trajectory
 
+## Sliding Mode Control for Drone Trajectory Following
 
-RBE 502 - Robot Control Final Project
+![Project Banner](./videos/project-banner.gif)
 
-The objective of this project is to develop a robust control scheme to enable a quadrotor to track
-desired trajectories in the presence of external disturbances.
+### Objective
 
-Part 1: Trajectory Generation
+The objective of this project is to develop a robust control scheme to enable a quadrotor to track desired trajectories in the presence of external disturbances.
 
-Consider a quintic trajectory of the form
-qd(t) = a0 + a1*t+ a2*t2 + a3*t3 + a4*t4 + a5*t5
-The coefficients a0, a1, a2, a3, a4 and a5 can be found by solving the matrix equation
-below:
+---
 
+## Part 1: Trajectory Generation
 
+### Quintic Trajectory
 
-Here a0, a1, a2, a3, a3, a4 and a5 are unknowns and has values:
+Consider a quintic trajectory of the form \( q_d(t) = a_0 + a_1t + a_2t^2 + a_3t^3 + a_4t^4 + a_5t^5 \).
 
-• p0 = (0, 0, 0) to p1 = (0, 0, 1) in 5 seconds
-• p1 = (0, 0, 1) to p2 = (1, 0, 1) in 15 seconds
-• p2 = (1, 0, 1) to p3 = (1, 1, 1) in 15 seconds
-• p3 = (1, 1, 1) to p4 = (0, 1, 1) in 15 seconds
-• p4 = (0, 1, 1) to p5 = (0, 0, 1) in 15 seconds
+#### Coefficients
 
-Differentiating qd(t) wrt. time we get velocity as:
-qd`(t) = a1+ 2*a2*t + 3*a3*t2+ 4*a4*t3 + 5*a5*t4
+The coefficients \( a_0, a_1, a_2, a_3, a_4 \) and \( a_5 \) can be found by solving the matrix equation below:
 
+![Matrix Equation](./videos/matrix-equation.png)
 
-And again differentiating velocity wrt. time we get acceleration as:
-qd``(t) = 2*a2* + 6*a3*t + 12*a4*t2 + 20*a5*t3
+#### Values
 
-Desired trajectory plot is as follows:
+Here are the values for the unknowns:
 
+- \( p_0 = (0, 0, 0) \) to \( p_1 = (0, 0, 1) \) in 5 seconds
+- \( p_1 = (0, 0, 1) \) to \( p_2 = (1, 0, 1) \) in 15 seconds
+- \( p_2 = (1, 0, 1) \) to \( p_3 = (1, 1, 1) \) in 15 seconds
+- \( p_3 = (1, 1, 1) \) to \( p_4 = (0, 1, 1) \) in 15 seconds
+- \( p_4 = (0, 1, 1) \) to \( p_5 = (0, 0, 1) \) in 15 seconds
 
+#### Velocity and Acceleration
 
+Differentiating \( q_d(t) \) with respect to time, we get:
 
+- Velocity: \( q_d'(t) = a_1 + 2a_2t + 3a_3t^2 + 4a_4t^3 + 5a_5t^4 \)
+- Acceleration: \( q_d''(t) = 2a_2 + 6a_3t + 12a_4t^2 + 20a_5t^3 \)
 
+#### Desired Trajectory Plot
 
+![Desired Trajectory](./videos/desired-trajectory.gif)
 
+---
 
+## Part 2: Controller Design
 
+### Control Law
 
+Control laws derived in handwritten notes are as follows:
 
+#### Tuned Parameters
 
+- **PD Controller**: \( K_p = 110 \), \( K_d = 8 \)
+- **Lambda Parameters**: \( \lambda_z = 12 \), \( \lambda_{\phi} = 13 \), \( \lambda_{\theta} = 19 \), \( \lambda_{\psi} = 5 \)
+- **Gain Parameters**: \( k_z = 6 \), \( k_{\phi} = 140 \), \( k_{\theta} = 111 \), \( k_{\psi} = 25 \)
+- **Saturation Function Constant**: \( a = 1.3 \), \( a_{\phi} = 1 \), \( a_{\theta} = 1 \), \( a_{\psi} = 1 \)
 
+---
 
-Part 2: Controller Design
-Control Law derived in handwritten notes are as follows:
+## Part 3: Code Explanation
 
+### Odom Callback and SMC Control
 
+Upon receiving a call to `odom_callback`, the time (`self.t`) is initialized and relevant information such as the drone's current position, velocity, orientation, and angular velocity along the 3 axes are extracted from the odometry message. These values are then fed into the `smc_control` function.
 
+#### SMC Control Function
 
+`smc_control` function first invokes the `traj_evaluate` function which predicts the drone's trajectory and invokes the `generate_trajectory` to obtain the desired position, velocity, and acceleration for the x, y, z axis at that instant.
 
-Tuned Parameters:
+---
 
-a) The PD controller utilizes Kp and Kd parameters to determine the speed at which the system approaches the trajectory. Increasing these parameters will result in faster convergence. In this case, Kp is set to 110 and Kd to 8.
-b) The lambda parameters are employed in the sliding mode control to determine the speed at which the system transitions from the initial state to the designated sliding surface. As with the previous case, larger values will result in faster convergence. The values assigned to the lambd_z, lambd_phi, lambd_theta, and lambd_psi parameters are 12, 13, 19, and 5, respectively.
-c) The gain parameters of the sliding mode control determine the speed at which the system descends down the sliding surface. Larger values result in faster convergence towards the desired trajectory. The k_z, k_phi, k_theta, and k_psi parameters are assigned values of 6, 140, 111, and 25, respectively.
-d) The saturation function constant is used to prevent chattering in sliding mode control, and is used to determine the boundary region around the desired trajectory. A smaller value will place the boundary closer to the desired trajectory. If chattering persists despite the implementation of the saturation function, the constant value should be increased. In this case, a value of 1.3,1,1,and 1 is assigned to the constant a, a_phi, a_theta, a_psi.
+## Part 4: Trajectory 3D and Analysis
 
+### 3D Trajectory
 
-Part 3: Code Explanation
+![3D Trajectory](./videos/3d-trajectory.gif)
 
-Code Explanation:
-
-
-Upon receiving a call to odom_callback, the time (self.t) is initialized and relevant information such as the drone's current position, velocity, orientation, and angular velocity along the 3 axes are extracted from the odometry message. These values are then fed into the smc_control function. smc_control function first invokes the traj_evaluate function which predicts the drone's trajectory and invokes the generate_trajectory to obtain the desired position, velocity, and acceleration for the x,y,z axis at that instant. Based on the derivation in part 1, the desired position, velocity, and acceleration are calculated and returned to smc_control by traj_evaluate. smc_control then determines the desired roll, pitch, and yaw angles and defines errors in altitude z, roll, pitch, and yaw angles. The sliding surface is defined using these errors, and then the values of u1, u2, u3, and u4 are calculated based on the calculations in part 2. The motor_speed function takes these values as input and returns the motor angular velocities based on the allocation matrix. These angular velocities are then clamped between motor min and max speeds, and finally, they are published to the motor_speed topic to actuate the drone.
-
-
-
-
-
-
-Part 4 Trajectory 3D and analysis:
-
-
-Drone’s trajectory in 3D space is shown as follows:
-
-
+### Analysis
 
 The 3D plot reveals that the drone's trajectory slightly deviates from the actual path, which can be attributed to the saturation function implemented to prevent chattering. Therefore, it can be concluded that the controller functions effectively and possesses the ability to handle external disturbances reasonably well, while still being able to closely track the desired trajectory.
 
+---
 
+## Getting Started
+
+To get started with this project, clone the repository:
+
+```bash
+git clone https://github.com/Shivam7Sharma/RBE502_Final_Project.git
