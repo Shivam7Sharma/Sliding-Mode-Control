@@ -32,8 +32,9 @@ Differentiating \( q<sub>d</sub>(t) \) with respect to time, we get:
 
 #### Desired Trajectory Plot
 
-![Desired Trajectory](./videos/demo_trajectory_plot.png)
-
+![Desired Trajectory position](./videos/TrajectoryPositionPlot3D.png)
+![Desired Trajectory velocity](./videos/TrajectoryVelocityPlot.png)
+![Desired Trajectory acceleration](./videos/TrajectoryAccelerationPlot.png)
 ---
 
 ## Part 2: Controller Design
@@ -65,7 +66,7 @@ Upon receiving a call to `odom_callback`, the time (`self.t`) is initialized and
 
 ### 3D Trajectory
 
-![3D Trajectory](./videos/3d-trajectory.gif)
+![3D Trajectory](./videos/demo_trajectory_plot.png)
 
 ### Analysis
 
