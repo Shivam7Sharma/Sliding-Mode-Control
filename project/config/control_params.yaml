@@ -1,0 +1,6 @@
+Z: {lambda: 5.5, k: 10.0}
+phi: {lambda: 12.5, k: 140.0}
+theta: {lambda: 12.5, k: 140.0}
+psi: {lambda: 5.5, k: 25.0}
+kp: 100.0
+kd: 5.5
