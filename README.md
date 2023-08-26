@@ -20,7 +20,7 @@ Consider a quintic trajectory of the form \( q_d(t) = a_0 + a_1t + a_2t^2 + a_3t
 
 The coefficients \( a_0, a_1, a_2, a_3, a_4 \) and \( a_5 \) can be found by solving the matrix equation below:
 
-![Matrix Equation](./videos/Screenshot 2023-08-26 152502.png****)
+![Matrix Equation](./videos/Matrix.png.png)
 
 
 #### Values
