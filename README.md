@@ -23,22 +23,12 @@ The coefficients \( a_0, a_1, a_2, a_3, a_4 \) and \( a_5 \) can be found by sol
 ![Matrix Equation](./videos/Matrix.png.png)
 
 
-#### Values
-
-Here are the values for the unknowns:
-
-- \( p_0 = (0, 0, 0) \) to \( p_1 = (0, 0, 1) \) in 5 seconds
-- \( p_1 = (0, 0, 1) \) to \( p_2 = (1, 0, 1) \) in 15 seconds
-- \( p_2 = (1, 0, 1) \) to \( p_3 = (1, 1, 1) \) in 15 seconds
-- \( p_3 = (1, 1, 1) \) to \( p_4 = (0, 1, 1) \) in 15 seconds
-- \( p_4 = (0, 1, 1) \) to \( p_5 = (0, 0, 1) \) in 15 seconds
-
 #### Velocity and Acceleration
 
-Differentiating \( q_d(t) \) with respect to time, we get:
+Differentiating \( q<sub>d</sub>(t) \) with respect to time, we get:
 
-- Velocity: \( q_d'(t) = a_1 + 2a_2t + 3a_3t^2 + 4a_4t^3 + 5a_5t^4 \)
-- Acceleration: \( q_d''(t) = 2a_2 + 6a_3t + 12a_4t^2 + 20a_5t^3 \)
+- Velocity: \( q'<sub>d</sub>(t) = a<sub>1</sub> + 2a<sub>2</sub>t + 3a<sub>3</sub>t<sup>2</sup> + 4a<sub>4</sub>t<sup>3</sup> + 5a<sub>5</sub>t<sup>4</sup> \)
+- Acceleration: \( q''<sub>d</sub>(t) = 2a<sub>2</sub> + 6a<sub>3</sub>t + 12a<sub>4</sub>t<sup>2</sup> + 20a<sub>5</sub>t<sup>3</sup> \)
 
 #### Desired Trajectory Plot
 
@@ -54,13 +44,11 @@ Control laws derived in handwritten notes are as follows:
 
 #### Tuned Parameters
 
-- **PD Controller**: \( K_p = 110 \), \( K_d = 8 \)
-- **Lambda Parameters**: \( \lambda_z = 12 \), \( \lambda_{\phi} = 13 \), \( \lambda_{\theta} = 19 \), \( \lambda_{\psi} = 5 \)
-- **Gain Parameters**: \( k_z = 6 \), \( k_{\phi} = 140 \), \( k_{\theta} = 111 \), \( k_{\psi} = 25 \)
-- **Saturation Function Constant**: \( a = 1.3 \), \( a_{\phi} = 1 \), \( a_{\theta} = 1 \), \( a_{\psi} = 1 \)
+- **PD Controller**: \( K<sub>p</sub> = 110 \), \( K<sub>d</sub> = 8 \)
+- **Lambda Parameters**: \( &lambda;<sub>z</sub> = 12 \), \( &lambda;<sub>&phi;</sub> = 13 \), \( &lambda;<sub>&theta;</sub> = 19 \), \( &lambda;<sub>&psi;</sub> = 5 \)
+- **Gain Parameters**: \( k<sub>z</sub> = 6 \), \( k<sub>&phi;</sub> = 140 \), \( k<sub>&theta;</sub> = 111 \), \( k<sub>&psi;</sub> = 25 \)
 
 ---
-
 ## Part 3: Code Explanation
 
 ### Odom Callback and SMC Control
