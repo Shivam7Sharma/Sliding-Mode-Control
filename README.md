@@ -32,7 +32,7 @@ Differentiating \( q<sub>d</sub>(t) \) with respect to time, we get:
 
 #### Desired Trajectory Plot
 
-![Desired Trajectory](./videos/desired-trajectory.gif)
+![Desired Trajectory](./videos/initial-height-gain.gif)
 
 ---
 
