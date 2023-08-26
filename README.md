@@ -2,7 +2,7 @@
 
 ## Sliding Mode Control for Drone Trajectory Following
 
-![Project Banner](./videos/project-banner.gif)
+![Project Banner](./videos/ezgif.com-video-to-gif.gif)
 
 ### Objective
 
